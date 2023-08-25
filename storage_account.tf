@@ -15,7 +15,6 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "default" {
 
 }
 
-
 # Virtual Network & Firewall configuration
 
 resource "azurerm_storage_account_network_rules" "firewall_rules" {
