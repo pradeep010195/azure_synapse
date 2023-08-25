@@ -25,6 +25,11 @@ steps:
   
   - script: terraform plan
     displayName: 'Terraform Plan for ${{ parameters.azureServiceConnection }}'
+    env:
+      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+      ARM_TENANT_ID: $(ARM_TENANT_ID)
   
   # - script: terraform apply -auto-approve
   #   displayName: 'Terraform Apply for ${{ parameters.azureServiceConnection }}'
