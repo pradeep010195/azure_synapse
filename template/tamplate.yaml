@@ -1,0 +1,21 @@
+parameters:
+  - name: azureServiceConnection
+    type: string
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: ${{ parameters.azureServiceConnection }}
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: az account set --subscription ${{ parameters.azureServiceConnection }}
+  displayName: 'Switch to ${{ parameters.azureServiceConnection }}'
+
+- script: terraform init
+  displayName: 'Terraform Init for ${{ parameters.azureServiceConnection }}'
+
+- script: terraform plan
+  displayName: 'Terraform Plan for ${{ parameters.azureServiceConnection }}'
+
+# - script: terraform apply -auto-approve
+#   displayName: 'Terraform Apply for ${{ parameters.azureServiceConnection }}'
