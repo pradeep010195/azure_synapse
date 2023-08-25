@@ -3,34 +3,34 @@ parameters:
     type: string
 
 steps:
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: ${{ parameters.azureServiceConnection }}
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: echo "Azure context set to ${{ parameters.azureServiceConnection }}"
-  displayName: 'Switch to ${{ parameters.azureServiceConnection }}'
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: ${{ parameters.azureServiceConnection }}
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: echo "Azure context set to ${{ parameters.azureServiceConnection }}"
+    displayName: 'Switch to ${{ parameters.azureServiceConnection }}'
   
 
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: ${{ parameters.azureServiceConnection }}
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      echo "Setting Azure context..."
-  displayName: 'Set Azure Context'
-  
-- script: |
-      export ARM_CLIENT_ID=$(az account show --query="id" -o tsv)
-      export ARM_TENANT_ID=$(az account show --query="tenantId" -o tsv)
-      export ARM_SUBSCRIPTION_ID=$(az account show --query="id" -o tsv)
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: ${{ parameters.azureServiceConnection }}
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: echo "Azure context set"
+    displayName: 'Set Azure Context'
+
+  - script: |
+      terraform init -backend-config="storage_account_name=mytfstatestorage" -backend-config="container_name=tfstate" -backend-config="key=terraform.tfstate" -backend-config="resource_group_name=myResourceGroup"
+      terraform plan
+      terraform apply -auto-approve
+    displayName: 'Run Terraform'
     
-- script: terraform init
-  displayName: 'Terraform Init for ${{ parameters.azureServiceConnection }}'
-
-- script: terraform plan
-  displayName: 'Terraform Plan for ${{ parameters.azureServiceConnection }}'
-
-# - script: terraform apply -auto-approve
-#   displayName: 'Terraform Apply for ${{ parameters.azureServiceConnection }}'
+  - script: terraform init
+    displayName: 'Terraform Init for ${{ parameters.azureServiceConnection }}'
+  
+  - script: terraform plan
+    displayName: 'Terraform Plan for ${{ parameters.azureServiceConnection }}'
+  
+  # - script: terraform apply -auto-approve
+  #   displayName: 'Terraform Apply for ${{ parameters.azureServiceConnection }}'
