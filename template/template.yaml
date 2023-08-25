@@ -8,7 +8,7 @@ steps:
     azureSubscription: ${{ parameters.azureServiceConnection }}
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: az account set --subscription ${{ parameters.azureServiceConnection }}
+    inlineScript: echo "Azure context set to ${{ parameters.azureServiceConnection }}"
   displayName: 'Switch to ${{ parameters.azureServiceConnection }}'
 
 - script: terraform init
