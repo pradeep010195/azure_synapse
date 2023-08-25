@@ -11,11 +11,21 @@ steps:
     inlineScript: echo "Azure context set to ${{ parameters.azureServiceConnection }}"
   displayName: 'Switch to ${{ parameters.azureServiceConnection }}'
   
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: ${{ parameters.azureServiceConnection }}
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "Setting Azure context..."
+  displayName: 'Set Azure Context'
+  
 - script: |
       export ARM_CLIENT_ID=$(az account show --query="id" -o tsv)
       export ARM_TENANT_ID=$(az account show --query="tenantId" -o tsv)
       export ARM_SUBSCRIPTION_ID=$(az account show --query="id" -o tsv)
-
+    
 - script: terraform init
   displayName: 'Terraform Init for ${{ parameters.azureServiceConnection }}'
 
