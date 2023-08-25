@@ -12,6 +12,6 @@ jobs:
     inputs:
       terraformVersion: '0.14.0'
 
-  - template: terraform-steps-template.yml
+  - template: template/template.yaml
     parameters:
       azureServiceConnection: 'testconnection'
