@@ -9,5 +9,5 @@ synadmin_username = "sqladminuser"
 synadmin_password = "Azure@123!"
 
 
-enable_syn_sparkpool = true
-enable_syn_sqlpool   = true
+enable_syn_sparkpool = false
+enable_syn_sqlpool   = false
