@@ -19,12 +19,6 @@ steps:
       scriptLocation: 'inlineScript'
       inlineScript: echo "Azure context set"
     displayName: 'Set Azure Context'
-
-  - script: |
-      terraform init -backend-config="storage_account_name=mytfstatestorage" -backend-config="container_name=tfstate" -backend-config="key=terraform.tfstate" -backend-config="resource_group_name=myResourceGroup"
-      terraform plan
-      terraform apply -auto-approve
-    displayName: 'Run Terraform'
     
   - script: terraform init
     displayName: 'Terraform Init for ${{ parameters.azureServiceConnection }}'
