@@ -1,5 +1,11 @@
+resource "random_string" "storage_name" {
+  length           = 16
+  special          = true
+  override_special = "/@£$"
+}
+
 resource "azurerm_storage_account" "default" {
-  name                     = "stsynapse0101devpradeep"
+  name                     = random_string.storage_name.result
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
@@ -7,7 +13,6 @@ resource "azurerm_storage_account" "default" {
   account_kind             = "StorageV2"
   is_hns_enabled           = true
 }
-
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "default" {
   name               = "default"
