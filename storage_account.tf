@@ -6,7 +6,7 @@ resource "random_id" "storageaccount" {
 }
 
 resource "azurerm_storage_account" "default" {
-  name                     = format("%.24s", lower("sg-${random_id.storageaccount.id}"))
+  name                     = format("%.24s", lower("${random_id.storageaccount.id}"))
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
