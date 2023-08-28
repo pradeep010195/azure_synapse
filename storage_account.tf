@@ -1,12 +1,12 @@
-resource "random_string" "storage_name" {
-  length           = 16
-  special          = true
-  override_special = "/@£$"
-  upper            = false
+resource "random_id" "storageaccount" {
+  keepers = {
+    name = "nodestorage"
+  }
+  byte_length = 12
 }
 
 resource "azurerm_storage_account" "default" {
-  name                     = random_string.storage_name.result
+  name                     = format("%.24s", lower("sg-${random_id.storageaccount.id}"))
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
