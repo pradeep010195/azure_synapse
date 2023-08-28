@@ -1,12 +1,5 @@
-resource "random_id" "storageaccount" {
-  keepers = {
-    name = "nodestorage"
-  }
-  byte_length = 12
-}
-
 resource "azurerm_storage_account" "default" {
-  name                     = format("%.24s", lower("${random_id.storageaccount.id}"))
+  name                     = "st${local.safe_basename}"
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
