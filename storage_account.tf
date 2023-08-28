@@ -2,6 +2,7 @@ resource "random_string" "storage_name" {
   length           = 16
   special          = true
   override_special = "/@£$"
+  upper            = false
 }
 
 resource "azurerm_storage_account" "default" {
