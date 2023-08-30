@@ -1,6 +1,6 @@
 variable "name" {
   type        = string
-  description = "Name of the deployment"
+  description = "Name of the deployments"
 }
 
 variable "environment" {
