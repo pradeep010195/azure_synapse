@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "default" {
-  name                     = "stsynapse0101de"
+  name                     = "stsynapse0101"
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
