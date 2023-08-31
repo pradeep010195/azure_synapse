@@ -9,7 +9,8 @@ jobs:
 - job: TerraformOnMultipleSubscriptions
   steps:
   - checkout: self
-  - task: Terraform
+  - task: TerraformInstaller@0
+
     inputs:
       terraformVersion: '0.14.0'
 
