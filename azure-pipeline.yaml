@@ -17,4 +17,3 @@ jobs:
   - template: template/template.yaml
     parameters:
       azureServiceConnection: 'practice-connection'
-
