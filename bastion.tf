@@ -17,3 +17,5 @@ resource "azurerm_public_ip" "default" {
   allocation_method   = "Static"
   sku                 = "Standard"
 }
+
+#
