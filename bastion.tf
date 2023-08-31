@@ -18,4 +18,3 @@ resource "azurerm_public_ip" "default" {
   sku                 = "Standard"
 }
 
-#
