@@ -9,7 +9,8 @@ jobs:
 - job: TerraformOnMultipleSubscriptions
   steps:
   - checkout: self
-  - task: TerraformInstaller@1
+  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@1
+
     inputs:
       terraformVersion: '0.14.0'
 
