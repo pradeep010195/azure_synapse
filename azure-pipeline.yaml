@@ -9,7 +9,7 @@ jobs:
 - job: TerraformOnMultipleSubscriptions
   steps:
   - checkout: self
-  - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@1
+  - task: TerraformInstaller@0
 
     inputs:
       terraformVersion: '0.14.0'
