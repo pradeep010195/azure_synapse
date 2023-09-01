@@ -32,5 +32,4 @@ steps:
       ARM_TENANT_ID: $(ARM_TENANT_ID)
 
 
-  # - script: terraform apply -auto-approve
-  #   displayName: 'Terraform Apply for ${{ parameters.azureServiceConnection }}'
+
