@@ -10,13 +10,7 @@ resource "azurerm_synapse_workspace" "default" {
   managed_virtual_network_enabled = true
   managed_resource_group_name     = "${azurerm_resource_group.default.name}-syn-managed"
 
-  public_network_access_enabled = false
-
-  # aad_admin {
-  #   login     = var.aad_login.name
-  #   object_id = var.aad_login.object_id
-  #   tenant_id = var.aad_login.tenant_id
-  # }
+  
 
   identity {
     type = "SystemAssigned"
