@@ -12,7 +12,7 @@ resource "azurerm_synapse_workspace" "default" {
 
   public_network_access_enabled = false
 
-
+  
 
   identity {
     type = "SystemAssigned"
