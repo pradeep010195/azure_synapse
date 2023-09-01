@@ -12,11 +12,7 @@ resource "azurerm_synapse_workspace" "default" {
 
   public_network_access_enabled = false
 
-  # aad_admin {
-  #   login     = var.aad_login.name
-  #   object_id = var.aad_login.object_id
-  #   tenant_id = var.aad_login.tenant_id
-  # }
+
 
   identity {
     type = "SystemAssigned"
