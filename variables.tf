@@ -15,7 +15,14 @@ variable "location" {
   default     = "West Europe"
 }
 
-
+variable "aad_login" {
+  description = "AAD login"
+  type = object({
+    name      = string
+    object_id = string
+    tenant_id = string
+  })
+}
 
 variable "jumphost_username" {
   type        = string
