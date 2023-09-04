@@ -14,5 +14,5 @@ aad_login = {
   tenant_id = "53721fdb-77af-43cc-9303-cf03b3c7b553"
 }
 
-enable_syn_sparkpool = true
-enable_syn_sqlpool   = true
+enable_syn_sparkpool = false
+enable_syn_sqlpool   = false 
