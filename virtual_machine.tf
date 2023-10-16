@@ -56,15 +56,16 @@ resource "azurerm_network_security_group" "jumphost_nsg" {
   resource_group_name = azurerm_resource_group.default.name
 
   security_rule {
-    name                       = "RDP"
-    priority                   = 1010
-    direction                  = "Inbound"
+    name                       = "Outbound_443"
+    priority                   = 1001
+    direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = 3389
+    destination_port_range     = "443"
     source_address_prefix      = "*"
-    destination_address_prefix = "*"
+    destination_address_prefix = "Internet"
+
   }
 }
 
