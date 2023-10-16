@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "default" {
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "default" {
-  name               = "file"
+  name               = "default"
   storage_account_id = azurerm_storage_account.default.id
 
 }
