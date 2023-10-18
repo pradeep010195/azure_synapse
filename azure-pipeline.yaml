@@ -4,7 +4,11 @@ trigger:
 
  
 
-parameters:
+- template: template/template.yaml
+
+  parameters:
+
+    azureServiceConnection: 'practice connection 1' 
 
 - name: tfAction
 
@@ -79,11 +83,3 @@ jobs:
     displayName: 'Terraform Destroy'
 
     condition: eq(parameters.tfAction, 'destroy')
-
- 
-
-  - template: template/template.yaml
-
-    parameters:
-
-      azureServiceConnection: 'practice connection 1'
