@@ -1,13 +1,13 @@
 resource "azurerm_storage_account" "default" {
-  name                     = "stsynapse0101dev"
+  name                     = "st${local.safe_basename}"
   resource_group_name      = azurerm_resource_group.default.name
   location                 = azurerm_resource_group.default.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
   is_hns_enabled           = true
-}
 
+}
 
 resource "azurerm_role_assignment" "sbdc_current_user" {
   scope                = azurerm_storage_account.default.id
