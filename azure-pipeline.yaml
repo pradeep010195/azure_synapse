@@ -1,39 +1,49 @@
+trigger:
+  - main
+
+parameters:
+  - name: tfAction
+    displayName: Terraform Action
+    type: string
+    default: apply
+    values:
+      - apply
+      - destroy
+  - name: azureServiceConnection
+    displayName: Azure Service Connection
+    type: string
+    default: 'practice connection 1'  # You can set a default value or remove this line if there's none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
 jobs:
   - job: TerraformOnMultipleSubscriptions
     steps:
       - checkout: self
-      - inputs:
-          terraformVersion: 0.14.0
-        task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
-      - displayName: Terraform Init
-        script: |
-          
+
+      - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+        inputs:
+          terraformVersion: '0.14.0'
+
+      - script: |
           terraform init
-      - displayName: Terraform Plan
-        script: |
-          
+        displayName: 'Terraform Init'
+
+      - script: |
           terraform plan
-      - condition: eq(parameters.tfAction, 'apply')
-        displayName: Terraform Apply
-        script: |
-          
+        displayName: 'Terraform Plan'
+
+      - script: |
           terraform apply -auto-approve
-      - condition: eq(parameters.tfAction, 'destroy')
-        displayName: Terraform Destroy
-        script: |
-          
+        displayName: 'Terraform Apply'
+        condition: eq(parameters.tfAction, 'apply')
+
+      - script: |
           terraform destroy -auto-approve
-pool:
-  vmImage: ubuntu-latest
-trigger:
-  - main
-  - parameters:
-      azureServiceConnection: practice connection 1
-    template: template/template.yaml
-  - default: apply
-    displayName: Terraform Action
-    name: tfAction
-    type: string
-    values:
-      - apply
-      - destroy
+        displayName: 'Terraform Destroy'
+        condition: eq(parameters.tfAction, 'destroy')
+
+      - template: template/template.yaml
+        parameters:
+          azureServiceConnection: ${{ parameters.azureServiceConnection }}
