@@ -86,4 +86,4 @@ jobs:
 
     parameters:
 
-      azureServiceConnection: 'practice-connection'
+      azureServiceConnection: 'practice connection 1'
