@@ -1,85 +1,62 @@
 trigger:
+  - main
 
-- main
+  - template: template/template.yaml
 
- 
+    parameters:
+      azureServiceConnection: "practice connection 1"
 
-- template: template/template.yaml
+  - name: tfAction
 
-  parameters:
+    displayName: Terraform Action
 
-    azureServiceConnection: 'practice connection 1' 
+    type: string
 
-- name: tfAction
+    default: apply
 
-  displayName: Terraform Action
+    values:
+      - apply
 
-  type: string
-
-  default: apply
-
-  values:
-
-  - apply
-
-  - destroy
-
- 
+      - destroy
 
 pool:
-
-  vmImage: 'ubuntu-latest'
-
- 
+  vmImage: "ubuntu-latest"
 
 jobs:
+  - job: TerraformOnMultipleSubscriptions
 
-- job: TerraformOnMultipleSubscriptions
+    steps:
+      - checkout: self
 
-  steps:
+      - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
 
-  - checkout: self
+        inputs:
+          terraformVersion: "0.14.0"
 
- 
+      - script: |
 
-  - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+          terraform init
 
-    inputs:
+        displayName: "Terraform Init"
 
-      terraformVersion: '0.14.0'
+      - script: |
 
- 
+          terraform plan
 
-  - script: |
+        displayName: "Terraform Plan"
 
-      terraform init
+      - script: |
 
-    displayName: 'Terraform Init'
+          terraform apply -auto-approve
 
- 
+        displayName: "Terraform Apply"
 
-  - script: |
+        condition: eq(parameters.tfAction, 'apply')
 
-      terraform plan
+      - script: |
 
-    displayName: 'Terraform Plan'
+          terraform destroy -auto-approve
 
-    
+        displayName: "Terraform Destroy"
 
-  - script: |
-
-      terraform apply -auto-approve
-
-    displayName: 'Terraform Apply'
-
-    condition: eq(parameters.tfAction, 'apply')
-
- 
-
-  - script: |
-
-      terraform destroy -auto-approve
-
-    displayName: 'Terraform Destroy'
-
-    condition: eq(parameters.tfAction, 'destroy')
+        condition: eq(parameters.tfAction, 'destroy')
