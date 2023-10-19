@@ -29,7 +29,7 @@ resource "azurerm_private_endpoint" "pe_web" {
   }
 
   private_dns_zone_group {
-    name                 = "private-dns-zone-group-syn-web"
+    name                 = "private-dns-zone-group-syn-we"
     private_dns_zone_ids = [azurerm_private_dns_zone.zone_web.id]
   }
 }
