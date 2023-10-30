@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-pco-ingest"
-    storage_account_name = "saccpcodatabricksunity"
-    container_name       = "terraform-state1"
+    resource_group_name  = "ade-dev-rg"
+    storage_account_name = "adedevadls"
+    container_name       = "terraform-state"
     key                  = "terraformstate-sub1.tf"
   }
 }
